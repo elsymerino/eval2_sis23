@@ -41,19 +41,28 @@ class MyForm extends StatelessWidget {
     return null;
   }
 
-  void _guardarDatos() {
-    FirebaseFirestore.instance.collection('tb-productos').add({
-      'idProducto': idController.text,
-      'nombre': nombreController.text,
-      'precio': precioController.text,
-      'stock': stockController.text,
-    });
+  void _guardarDatos(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      FirebaseFirestore.instance.collection('tb-productos').add({
+        'idProducto': idController.text,
+        'nombre': nombreController.text,
+        'precio': precioController.text,
+        'stock': stockController.text,
+      });
 
-    // Resetear los controladores después de guardar
-    idController.clear();
-    nombreController.clear();
-    precioController.clear();
-    stockController.clear();
+      // Resetear los controladores después de guardar
+      idController.clear();
+      nombreController.clear();
+      precioController.clear();
+      stockController.clear();
+
+      // Mostrar un mensaje de éxito
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Los datos se han guardado exitosamente'),
+        ),
+      );
+    }
   }
 
   @override
@@ -81,8 +90,7 @@ class MyForm extends StatelessWidget {
               SizedBox(height: 16),
               Row(
                 children: [
-                  Icon(
-                      Icons.shopping_basket), // Cambiado a un icono de producto
+                  Icon(Icons.shopping_basket),
                   SizedBox(width: 8),
                   Expanded(
                     child: TextFormField(
@@ -110,7 +118,7 @@ class MyForm extends StatelessWidget {
               SizedBox(height: 16),
               Row(
                 children: [
-                  Icon(Icons.shopping_cart), // Cambiado a un icono de caja
+                  Icon(Icons.shopping_cart),
                   SizedBox(width: 8),
                   Expanded(
                     child: TextFormField(
@@ -123,14 +131,10 @@ class MyForm extends StatelessWidget {
               ),
               SizedBox(height: 16),
               Container(
-                width: 60, // Ancho del botón
-                height: 60, // Alto del botón
+                width: 60,
+                height: 60,
                 child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      _guardarDatos();
-                    }
-                  },
+                  onPressed: () => _guardarDatos(context),
                   child: Icon(Icons.save),
                 ),
               ),
