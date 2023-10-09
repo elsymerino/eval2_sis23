@@ -27,21 +27,21 @@ class MyApp extends StatelessWidget {
 }
 
 class MyForm extends StatelessWidget {
-  final TextEditingController idProductoController = TextEditingController();
+  final TextEditingController idController = TextEditingController();
   final TextEditingController nombreController = TextEditingController();
   final TextEditingController precioController = TextEditingController();
   final TextEditingController stockController = TextEditingController();
 
   void _guardarDatos() {
     FirebaseFirestore.instance.collection('tb-productos').add({
-      'idProducto': idProductoController.text,
+      'idProducto': idController.text,
       'nombre': nombreController.text,
       'precio': precioController.text,
       'stock': stockController.text,
     });
 
     // Resetear los controladores después de guardar
-    idProductoController.clear();
+    idController.clear();
     nombreController.clear();
     precioController.clear();
     stockController.clear();
@@ -60,8 +60,8 @@ class MyForm extends StatelessWidget {
                 SizedBox(width: 8),
                 Expanded(
                   child: TextFormField(
-                    controller: idProductoController,
-                    decoration: InputDecoration(labelText: 'ID Producto'),
+                    controller: idController,
+                    decoration: InputDecoration(labelText: 'ID'),
                   ),
                 ),
               ],
@@ -107,13 +107,11 @@ class MyForm extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Container(
-              constraints: BoxConstraints.expand(height: 60),
+              width: 60, // Ancho del botón
+              height: 60, // Alto del botón
               child: ElevatedButton(
                 onPressed: _guardarDatos,
-                child: Text(
-                  'Guardar',
-                  style: TextStyle(fontSize: 24),
-                ),
+                child: Icon(Icons.save),
               ),
             ),
           ],
@@ -173,7 +171,7 @@ class ListaRegistros extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: DataTable(
               columns: [
-                DataColumn(label: Text('ID Producto')),
+                DataColumn(label: Text('ID')),
                 DataColumn(label: Text('Nombre')),
                 DataColumn(label: Text('Precio')),
                 DataColumn(label: Text('Stock')),
