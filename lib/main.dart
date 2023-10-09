@@ -76,7 +76,8 @@ class MyForm extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(Icons.person),
+                  Icon(Icons
+                      .credit_card), // Cambiado a una tarjeta de identificación
                   SizedBox(width: 8),
                   Expanded(
                     child: TextFormField(
@@ -90,7 +91,7 @@ class MyForm extends StatelessWidget {
               SizedBox(height: 16),
               Row(
                 children: [
-                  Icon(Icons.shopping_basket),
+                  Icon(Icons.shopping_basket), // Cambiado a un producto
                   SizedBox(width: 8),
                   Expanded(
                     child: TextFormField(
@@ -104,7 +105,7 @@ class MyForm extends StatelessWidget {
               SizedBox(height: 16),
               Row(
                 children: [
-                  Icon(Icons.credit_card),
+                  Icon(Icons.money), // Cambiado a un billete
                   SizedBox(width: 8),
                   Expanded(
                     child: TextFormField(
@@ -118,7 +119,7 @@ class MyForm extends StatelessWidget {
               SizedBox(height: 16),
               Row(
                 children: [
-                  Icon(Icons.shopping_cart),
+                  Icon(Icons.shopping_cart), // Cambiado a una caja
                   SizedBox(width: 8),
                   Expanded(
                     child: TextFormField(
