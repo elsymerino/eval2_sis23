@@ -18,10 +18,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Crud Firebase',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'CATEGORIAS'),
+      home: const MyHomePage(title: 'DSW23'),
     );
   }
 }
@@ -159,8 +159,7 @@ class ListaRegistros extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream:
-          FirebaseFirestore.instance.collection('tb-productos').snapshots(),
+      stream: FirebaseFirestore.instance.collection('tb-productos').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return CircularProgressIndicator();
