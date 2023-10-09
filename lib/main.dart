@@ -95,7 +95,7 @@ class MyForm extends StatelessWidget {
             SizedBox(height: 16),
             Row(
               children: [
-                Icon(Icons.location_on),
+                Icon(Icons.shopping_cart), // Cambiado a un icono de caja
                 SizedBox(width: 8),
                 Expanded(
                   child: TextFormField(
