@@ -32,6 +32,15 @@ class MyForm extends StatelessWidget {
   final TextEditingController precioController = TextEditingController();
   final TextEditingController stockController = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
+
+  String? _validateField(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Este campo es obligatorio';
+    }
+    return null;
+  }
+
   void _guardarDatos() {
     FirebaseFirestore.instance.collection('tb-productos').add({
       'idProducto': idController.text,
@@ -52,69 +61,80 @@ class MyForm extends StatelessWidget {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.2),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Icon(Icons.person),
-                SizedBox(width: 8),
-                Expanded(
-                  child: TextFormField(
-                    controller: idController,
-                    decoration: InputDecoration(labelText: 'ID'),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.person),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: TextFormField(
+                      controller: idController,
+                      decoration: InputDecoration(labelText: 'ID'),
+                      validator: _validateField,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 16),
-            Row(
-              children: [
-                Icon(Icons.person),
-                SizedBox(width: 8),
-                Expanded(
-                  child: TextFormField(
-                    controller: nombreController,
-                    decoration: InputDecoration(labelText: 'Nombre'),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 16),
-            Row(
-              children: [
-                Icon(Icons.credit_card),
-                SizedBox(width: 8),
-                Expanded(
-                  child: TextFormField(
-                    controller: precioController,
-                    decoration: InputDecoration(labelText: 'Precio'),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 16),
-            Row(
-              children: [
-                Icon(Icons.shopping_cart), // Cambiado a un icono de caja
-                SizedBox(width: 8),
-                Expanded(
-                  child: TextFormField(
-                    controller: stockController,
-                    decoration: InputDecoration(labelText: 'Stock'),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 16),
-            Container(
-              width: 60, // Ancho del botón
-              height: 60, // Alto del botón
-              child: ElevatedButton(
-                onPressed: _guardarDatos,
-                child: Icon(Icons.save),
+                ],
               ),
-            ),
-          ],
+              SizedBox(height: 16),
+              Row(
+                children: [
+                  Icon(Icons.person),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: TextFormField(
+                      controller: nombreController,
+                      decoration: InputDecoration(labelText: 'Nombre'),
+                      validator: _validateField,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Row(
+                children: [
+                  Icon(Icons.credit_card),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: TextFormField(
+                      controller: precioController,
+                      decoration: InputDecoration(labelText: 'Precio'),
+                      validator: _validateField,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Row(
+                children: [
+                  Icon(Icons.shopping_cart), // Cambiado a un icono de caja
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: TextFormField(
+                      controller: stockController,
+                      decoration: InputDecoration(labelText: 'Stock'),
+                      validator: _validateField,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Container(
+                width: 60, // Ancho del botón
+                height: 60, // Alto del botón
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState?.validate() ?? false) {
+                      _guardarDatos();
+                    }
+                  },
+                  child: Icon(Icons.save),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -174,7 +194,9 @@ class ListaRegistros extends StatelessWidget {
                 DataColumn(label: Text('ID')),
                 DataColumn(label: Text('Nombre')),
                 DataColumn(label: Text('Precio')),
-                DataColumn(label: Text('Stock')),
+                DataColumn(
+                    label: Icon(
+                        Icons.shopping_cart)), // Cambiado a un icono de caja
               ],
               rows: registros.map((registro) {
                 var data = registro.data() as Map<String, dynamic>;
