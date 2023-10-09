@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "386715127640",
+    "project_id": "products-d04a5",
+    "storage_bucket": "products-d04a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386715127640:android:0ac37f0e52be8c7940df2d",
+        "android_client_info": {
+          "package_name": "com.elsyveroitca.eval2_sis23"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi8QKuwZtrjZbQcfvKFQihF5gbuR3YTaY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
