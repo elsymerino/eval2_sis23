@@ -81,7 +81,8 @@ class MyForm extends StatelessWidget {
               SizedBox(height: 16),
               Row(
                 children: [
-                  Icon(Icons.person),
+                  Icon(
+                      Icons.shopping_basket), // Cambiado a un icono de producto
                   SizedBox(width: 8),
                   Expanded(
                     child: TextFormField(
@@ -194,9 +195,7 @@ class ListaRegistros extends StatelessWidget {
                 DataColumn(label: Text('ID')),
                 DataColumn(label: Text('Nombre')),
                 DataColumn(label: Text('Precio')),
-                DataColumn(
-                    label: Icon(
-                        Icons.shopping_cart)), // Cambiado a un icono de caja
+                DataColumn(label: Text('Stock')),
               ],
               rows: registros.map((registro) {
                 var data = registro.data() as Map<String, dynamic>;
